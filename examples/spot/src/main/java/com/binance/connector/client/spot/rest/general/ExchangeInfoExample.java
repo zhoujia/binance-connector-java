@@ -31,8 +31,9 @@ public class ExchangeInfoExample {
         if (api == null) {
             ClientConfiguration clientConfiguration = SpotRestApiUtil.getClientConfiguration();
             SignatureConfiguration signatureConfiguration = new SignatureConfiguration();
-            signatureConfiguration.setApiKey("apiKey");
-            signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setApiKey("96to4bXTnI4mZxMrs00gSePAXOp5I4flwHtsCnOyd11FjzQKocHiuN8clBF0i7s4");
+            //signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setSecretKey("MaZljMzJ6pAUiZvGcsjcDHHSkD2naqb6XiI6Y0fv6bBWt5RHC30wuvJIKyPCHVCZ");
             clientConfiguration.setSignatureConfiguration(signatureConfiguration);
             api = new SpotRestApi(clientConfiguration);
         }
@@ -51,10 +52,21 @@ public class ExchangeInfoExample {
         Symbols symbols = null;
         Permissions permissions = null;
         Boolean showPermissionSets = true;
-        SymbolStatus symbolStatus = SymbolStatus.TRADING;
-        ApiResponse<ExchangeInfoResponse> response =
-                getApi().exchangeInfo(
-                                symbol, symbols, permissions, showPermissionSets, symbolStatus);
+        //SymbolStatus symbolStatus = SymbolStatus.TRADING;
+        SymbolStatus symbolStatus = null;
+        ApiResponse<ExchangeInfoResponse> response = getApi().exchangeInfo(symbol, symbols, permissions, showPermissionSets, symbolStatus);
         System.out.println(response.getData());
+    }
+    public static void main(String[] args) {
+        ExchangeInfoExample example = new ExchangeInfoExample();
+        try {
+            example.exchangeInfoExample();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling GeneralApi#exchangeInfoExample");
+            System.err.println("Status code: " + e.getMessage());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
     }
 }

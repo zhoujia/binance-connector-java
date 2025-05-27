@@ -13,11 +13,7 @@
 package com.binance.connector.client.spot.rest.model;
 
 import com.binance.connector.client.spot.rest.JSON;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -96,7 +92,8 @@ public class TickerPriceResponse2 extends ArrayList<TickerPriceResponse2Inner> {
     static {
         // a set of all properties/fields (JSON key names)
         openapiFields = new HashSet<String>();
-
+        openapiFields.add("symbol");
+        openapiFields.add("price");
         // a set of required properties/fields (JSON key names)
         openapiRequiredFields = new HashSet<String>();
     }
@@ -118,18 +115,22 @@ public class TickerPriceResponse2 extends ArrayList<TickerPriceResponse2Inner> {
                                 TickerPriceResponse2.openapiRequiredFields.toString()));
             }
         }
-
-        Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-        // check to see if the JSON string contains additional fields
-        for (Map.Entry<String, JsonElement> entry : entries) {
-            if (!TickerPriceResponse2.openapiFields.contains(entry.getKey())) {
-                throw new IllegalArgumentException(
-                        String.format(
-                                "The field `%s` in the JSON string is not defined in the"
-                                        + " `TickerPriceResponse2` properties. JSON: %s",
-                                entry.getKey(), jsonElement.toString()));
+        JsonArray asJsonArray = jsonElement.getAsJsonArray();
+        for (JsonElement element : asJsonArray) {
+            Set<Map.Entry<String, JsonElement>> entries = element.getAsJsonObject().entrySet();
+            // check to see if the JSON string contains additional fields
+            for (Map.Entry<String, JsonElement> entry : entries) {
+                if (!TickerPriceResponse2.openapiFields.contains(entry.getKey())) {
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "The field `%s` in the JSON string is not defined in the"
+                                            + " `TickerPriceResponse2` properties. JSON: %s",
+                                    entry.getKey(), jsonElement.toString()));
+                }
             }
+
         }
+
     }
 
     public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

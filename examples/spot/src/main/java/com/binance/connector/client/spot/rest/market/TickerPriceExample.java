@@ -29,8 +29,9 @@ public class TickerPriceExample {
         if (api == null) {
             ClientConfiguration clientConfiguration = SpotRestApiUtil.getClientConfiguration();
             SignatureConfiguration signatureConfiguration = new SignatureConfiguration();
-            signatureConfiguration.setApiKey("apiKey");
-            signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setApiKey("96to4bXTnI4mZxMrs00gSePAXOp5I4flwHtsCnOyd11FjzQKocHiuN8clBF0i7s4");
+            //signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setSecretKey("MaZljMzJ6pAUiZvGcsjcDHHSkD2naqb6XiI6Y0fv6bBWt5RHC30wuvJIKyPCHVCZ");
             clientConfiguration.setSignatureConfiguration(signatureConfiguration);
             api = new SpotRestApi(clientConfiguration);
         }
@@ -52,8 +53,15 @@ public class TickerPriceExample {
      */
     public void tickerPriceExample() throws ApiException {
         String symbol = "BNBUSDT";
-        Symbols symbols = null;
-        ApiResponse<TickerPriceResponse> response = getApi().tickerPrice(symbol, symbols);
-        System.out.println(response.getData());
+        Symbols symbols = new Symbols();
+        symbols.add("BNBUSDT");
+        ApiResponse<TickerPriceResponse> response = getApi().tickerPrice(symbol, null);
+        System.out.println(response.getData().getTickerPriceResponse1());
+        //System.out.println(response.getData().getTickerPriceResponse2());
+        System.out.println(response.getData().toJson());
+    }
+    public static void main(String[] args) throws ApiException {
+        TickerPriceExample example = new TickerPriceExample();
+        example.tickerPriceExample();
     }
 }

@@ -28,8 +28,9 @@ public class AvgPriceExample {
         if (api == null) {
             ClientConfiguration clientConfiguration = SpotRestApiUtil.getClientConfiguration();
             SignatureConfiguration signatureConfiguration = new SignatureConfiguration();
-            signatureConfiguration.setApiKey("apiKey");
-            signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setApiKey("96to4bXTnI4mZxMrs00gSePAXOp5I4flwHtsCnOyd11FjzQKocHiuN8clBF0i7s4");
+            //signatureConfiguration.setPrivateKey("path/to/private.key");
+            signatureConfiguration.setSecretKey("MaZljMzJ6pAUiZvGcsjcDHHSkD2naqb6XiI6Y0fv6bBWt5RHC30wuvJIKyPCHVCZ");
             clientConfiguration.setSignatureConfiguration(signatureConfiguration);
             api = new SpotRestApi(clientConfiguration);
         }
@@ -45,7 +46,12 @@ public class AvgPriceExample {
      */
     public void avgPriceExample() throws ApiException {
         String symbol = "BNBUSDT";
-        ApiResponse<AvgPriceResponse> response = getApi().avgPrice(symbol);
+        //String symbol = "";
+        ApiResponse<AvgPriceResponse> response = getApi().avgPrice(null);
         System.out.println(response.getData());
+    }
+    public static void main(String[] args) throws ApiException {
+        AvgPriceExample example = new AvgPriceExample();
+        example.avgPriceExample();
     }
 }
